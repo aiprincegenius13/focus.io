@@ -21,7 +21,7 @@ let distractingCircles = [];
 let gameRunning = false;
 
 //Distracting circles section
-function updateDistractingCircles {
+function updateDistractingCircles() {
 distractingCircles.forEach(circle => {
     circle.x += circle.dx;
     circle.y += circle.dy;
@@ -71,7 +71,7 @@ ctx.fill();
 ctx.closePath();
 }
 
-function UpdateMainCricle {
+function UpdateMainCricle() {
 
 }
 
