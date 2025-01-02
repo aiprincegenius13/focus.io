@@ -21,3 +21,9 @@ body{
     height: 75%;
     background-color: darkblue;
 }
+
+#startGameButton {
+font-size: 50;
+font-weight: bold;
+background-color: green;
+}

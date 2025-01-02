@@ -13,12 +13,39 @@ canvas.height = window.innerHeight;
 
 //let variables section
 let playerName = "";
-let lifePoint = 100;
+let lifePoints = 100;
 let score = 9;
-letplayerScores = [];
+let playerScores = [];
 let mainCircle = {x: 0, y: 0, radius: 50};
 let distractingCircles = [];
 let gameRunning = false;
+
+//StartGame functinality
+function gameLoop(){
+    if (!gameRunning) return;
+    score ++;
+    updateDistractingCircles();
+    requestAnimationFrame(gameLoop);
+}
+
+startGameButton.addEventListener("click", () => {
+    playerName = playerNameInput.value.trim();
+    if (playerName) {
+        alert("Ente Name To Start");
+        return;
+    }
+
+    startScreen.style = "none";
+    lifePoints = 100;
+    score = 0;
+    gameRunning = true;
+    UpdateDistractingCircles();
+    UpdateMainCricle();
+    randomize();
+    setInterval(UpdateMainCricle, 2000);
+    gameLoop();
+})
+
 
 //Distracting circles section
 function updateDistractingCircles() {
@@ -26,7 +53,7 @@ distractingCircles.forEach(circle => {
     circle.x += circle.dx;
     circle.y += circle.dy;
 
- //Randomize ricles function reference   
+ //Randomize circles function  
  function randomize(){
     var radius = Math.floor(Math.random()*25)+10;
 
@@ -44,7 +71,7 @@ distractingCircles.forEach(circle => {
         y: y,
         r: radius
     });
-    drawCircle(x,y,radius);
+    distractingCircles(x,y,radius);
 }
 
 var interval = setInterval(randomize, 1000);
@@ -62,7 +89,7 @@ distractingCircles.forEach(circle => {
 
 //Main Circle section
 //draw Main Circle
-function drawMain() {
+function drawainCircle() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 ctx.beginPath();
 ctx.arc(mainCircle.x, mainCircle.y, mainCircle.radius, 0, Math.PI * 2);
@@ -72,18 +99,28 @@ ctx.closePath();
 }
 
 function UpdateMainCricle() {
-
+mainCircle.x = randomInt(mainCircle.raiud, canvas.with - mainCircle - mainCircle.radius);
+mainCircle.y = randomInt(mainCircle.raiud, canvas.with - mainCircle - mainCircle.radius);
 }
 
 //functionality section
 //Keeping lifepoints function 
 //loosig lifepoint function
+//Create movement with mouse
+//resie of canvas afeter end game
 
 function cursorInbound(mouseX, mouseY) {
     const dx = mouseX - mainCircle.x;
     const dy = mouseY - mainCircle.y;
     return Math.sqrt(dx * dx + dy * dy) <= mainCircle.radius;
 }
+
+function endGame() {
+    alert(`You have lost focus.  Game Over! Your score:  $(score)`);
+        score.push({name: playerName, score});
+        gameRunning = false;
+        startScreen.style.display = "flex";
+    }
 
 canvas.addEventListener("mouseMove", event => {
     if (!gameRunning) return;
@@ -95,9 +132,7 @@ canvas.addEventListener("mouseMove", event => {
         }
     }
 })
-
-
-
-
-
-
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
