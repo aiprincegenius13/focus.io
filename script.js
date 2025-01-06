@@ -11,8 +11,7 @@ let playerName = "";
 let lifePoints = 100;
 let score = 0;
 let playerScores = [];
-
- let mainCircle = []; //{ x: 0, y: 0, radius: 50 };
+ let mainCircle = { x: 0, y: 0, radius: 50 };
 let distractingCircles = [];
 let gameRunning = false;
 
@@ -42,7 +41,7 @@ startGameButton.addEventListener("click", () => {
 });
 
 
-//distraaction backgroun section
+//distraaction background section
 function updateDistractingCircles() {
     distractingCircles.forEach(circle => {
         circle.x += circle.dx;
@@ -65,7 +64,7 @@ function getRandomInt(min, max) {
 
 function randomizeDistractingCircles() {
     distractingCircles = [];
-    for (let i = 0; i < 2000; i++) {
+    for (let i = 0; i < 50; i++) {
         distractingCircles.push({
             x: getRandomInt(50, canvas.width - 50),
             y: getRandomInt(50, canvas.height - 50),
@@ -79,14 +78,28 @@ function randomizeDistractingCircles() {
 
 
 //Main circle section
+
+
 function drawMainCircle() {
     ctx.beginPath();
     ctx.arc(mainCircle.x, mainCircle.y, mainCircle.radius, 0, Math.PI * 2);
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "black";
     ctx.fill();
     ctx.closePath();
 }
 
+function randomizeMainCircle() {
+    drawMainCircle = [];
+    for (let i = 0; i < 2; i++) {
+        drawMainCircle.push({
+            x: getRandomInt(50, canvas.width - 50),
+            y: getRandomInt(50, canvas.height - 50),
+            radius: getRandomInt(10, 25),
+            dx: getRandomInt(-2, 2),
+            dy: getRandomInt(-2, 2),
+        });
+    }
+}
 function updateMainCircle() {
     mainCircle.x = getRandomInt(mainCircle.radius, canvas.width - mainCircle.radius);
     mainCircle.y = getRandomInt(mainCircle.radius, canvas.height - mainCircle.radius);
