@@ -31,7 +31,7 @@ startGameButton.addEventListener("click", () => {
     }
 //game initialization
     startScreen.style.display;
-    lifePoints = 100;
+    lifePoints = 300;
     score = 0;
     gameRunning = true;
     randomizeDistractingCircles();

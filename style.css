@@ -1,15 +1,17 @@
 #body {
     margin: 0;
     overflow: hidden;
-    font-family: 'Times New Roman', Times, serif;color: 
-  
+    font-family: 'Times New Roman', Times, serif;color:  
 }
 
-
+#heading {
+    color: white;
+    text-shadow: 5px 2px 5px cyan;
+}
 
 #gameCanvas {
     display: block;
-    height: 100%;
+    height: 75%;
     width: 100%;
     background-color: cyan;
     /* z-index: -1; */
